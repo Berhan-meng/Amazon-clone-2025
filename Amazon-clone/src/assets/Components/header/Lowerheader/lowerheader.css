@@ -1,0 +1,33 @@
+.lowerHeader {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background-color: #232f3e;
+  padding: 10px 20px;
+  color: white;
+  font-size: 14px;
+}
+
+.lowerHeader__menu {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.lowerHeader__list {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+
+.lowerHeader__list li {
+  cursor: pointer;
+  padding: 5px 0;
+  transition: 0.2s;
+}
+
+.lowerHeader__list li:hover {
+  border-bottom: 2px solid white;
+}

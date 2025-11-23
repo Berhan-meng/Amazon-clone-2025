@@ -1,0 +1,24 @@
+@media screen and (max-width: 576px) {
+  /* Main header */
+  .header {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+  }
+
+  /* Hide the menu list, keep only icon + All */
+  .lowerHeader__list {
+    display: none;
+  }
+
+  /* Hide language selector */
+  .header__langSelect {
+    display: none;
+  }
+
+  /* Search bar full width */
+  .header__search {
+    width: 100%;
+  }
+}

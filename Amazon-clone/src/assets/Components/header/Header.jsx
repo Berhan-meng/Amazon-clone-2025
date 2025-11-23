@@ -1,5 +1,7 @@
 import React from "react";
 import "./Header.css";
+import { BiCart } from "react-icons/bi";
+
 
 export default function Header() {
   return (
@@ -17,7 +19,9 @@ export default function Header() {
 
         {/* Location */}
         <div className="header__location">
-          <span className="header__locationIcon">📍</span>
+          <span className="header__locationIcon">
+            <img src="../../../../public/location-2952.png" alt="" />
+          </span>
           <div>
             <p className="header__smallText">Deliver to</p>
             <span className="header__boldText">Ethiopia</span>
@@ -68,7 +72,7 @@ export default function Header() {
 
         {/* Cart */}
         <a className="header__cart" href="/cart">
-          <span className="header__cartIcon">🛒</span>
+          <BiCart className="header__cartIcon" size={35} />
           <span className="header__cartCount">0</span>
         </a>
       </div>
