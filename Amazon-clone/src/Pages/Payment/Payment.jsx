@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
 import { DataContext } from "../../assets/Components/DataProvider/DataProvider.jsx";
-import "./payment.css";
 import ProductCard from "../../assets/Components/Product/ProductCard.jsx";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import { formatMoney } from "../../Utility/Money.js";
@@ -10,6 +9,7 @@ import { ClipLoader } from "react-spinners";
 import { db } from "../../Utility/firebase.js";
 import { useNavigate } from "react-router-dom";
 import Layout from "../../assets/Components/Layout/Layout.jsx";
+import styles from "./payment.module.css";
 
 export default function Payment() {
   const [{ user, basket }, dispatch] = useContext(DataContext);
@@ -37,7 +37,7 @@ export default function Payment() {
       // 1. Get clientSecret from backend (Firebase Function)
       const response = await instance({
         method: "POST",
-        url: `payment/create?total=${total * 100}`,
+        url: `/payment/create?total=${total * 100}`,
       });
 
       const clientSecret = response.data?.clientSecret;
@@ -48,7 +48,7 @@ export default function Payment() {
         return;
       }
 
-      // 2. Confirm payment using Stripe
+      // 2. React side Confirmation using Stripe
       const { paymentIntent, error } = await stripe.confirmCardPayment(
         clientSecret,
         {
@@ -92,11 +92,14 @@ export default function Payment() {
   return (
     <Layout>
       {/* {Header} */}
-      <div className="payment_header"> check out ({totalItem}) items</div>
+      <div className={styles.payment_header}>
+        {" "}
+        check out ({totalItem}) items
+      </div>
       {/* {Payment Method} */}
-      <section className="payment">
+      <section className={styles.payment}>
         {/* {Adress} */}
-        <div className="flex">
+        <div className={styles.flex}>
           <h3>Delivery Adress</h3>
           <div>
             <div>{user?.email}</div>
@@ -106,7 +109,7 @@ export default function Payment() {
         </div>
         <hr />
         {/* {product} */}
-        <div className="flex">
+        <div className={styles.flex}>
           <h3>Review Items and Delivery</h3>
           <div>
             {basket?.map((item, i) => (
@@ -122,30 +125,31 @@ export default function Payment() {
         </div>
         <hr />
         {/* {card  form} */}
-        <div className="flex">
-          <h3>Payment Method</h3>
-          <div className="payment_card_container">
-            <div className="payment_details">
-              <form action={handlePayment}></form>
-              {/* {error} */}
-              {cardError && <small>{cardError}</small>}
-              {/* {Card Element} */}
-              <CardElement onChange={handleChange} />
-              <div className="payment_price">
-                <div>
-                  <span>Total Order | {formatMoney(total)}</span>
+        <div className={styles.flex}>
+          <h3>Payment Methods</h3>
+          <div className={styles.payment_card_container}>
+            <div className={styles.payment_details}>
+              <form onSubmit={handlePayment}>
+                {/* {error} */}
+                {cardError && <small>{cardError}</small>}
+                {/* {Card Element} */}
+                <CardElement onChange={handleChange} />
+                <div className={styles.payment_price}>
+                  <div>
+                    <span>Total Order | {formatMoney(total)}</span>
+                  </div>
+                  <button type="submit">
+                    {processing ? (
+                      <div className={styles.loading}>
+                        <ClipLoader color="grey" size={20} />
+                        <p>Please wait...</p>
+                      </div>
+                    ) : (
+                      "pay now"
+                    )}
+                  </button>
                 </div>
-                <button type="submit" onClick={handlePayment}>
-                  {processing ? (
-                    <div className="loading">
-                      <ClipLoader color="grey" size={12} />
-                      <p>Please wait...</p>
-                    </div>
-                  ) : (
-                    "pay now"
-                  )}
-                </button>
-              </div>
+              </form>
             </div>
           </div>
         </div>

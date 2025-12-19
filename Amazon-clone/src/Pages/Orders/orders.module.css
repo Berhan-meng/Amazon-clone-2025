@@ -17,5 +17,7 @@
   height: auto !important;
 }
 .orders_containerr img {
-  height: auto !important;
+
+  width: 20px !important;
+  /* height: auto !important; */
 }
