@@ -9,6 +9,9 @@
 width: 100px !important;
 margin-top: 80px !important;
 }
+.container div{
+  height: auto !important;
+}
 .product__container {
   width: 100%;
 }

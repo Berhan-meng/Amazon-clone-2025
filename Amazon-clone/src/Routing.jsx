@@ -1,5 +1,5 @@
-import { Routes, Route } from "react-router-dom";
-import { HashRouter } from "react-router-dom";
+// import { Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Landing from "./Pages/Landing/Landing";
 // import Signup from "./Pages/Auth/Signup";
 import Cart from "./Pages/Cart/Cart";
