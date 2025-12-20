@@ -9,178 +9,86 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { Link } from "react-router-dom";
 import Layout from "../../assets/Components/Layout/Layout.jsx";
 
-// export default function Cart() {
-//   const [{ basket }, dispatch] = useContext(DataContext);
-//   console.log(basket);
-//   const total = basket.reduce((amount, cartItem) => {
-//     return amount + cartItem.product.price * cartItem.amount;
-//   }, 0);
-
-//   const increament = (item) => {
-//     dispatch({
-//       type: Type.ADD_TO_BASKET,
-//       item,
-//     });
-//   };
-
-//   const decreament = (item) => {
-//     dispatch({
-//       type: Type.REMOVE_FROM_BASKET,
-//       product: item.product,
-//     });
-//   };
-//   return (
-//     <Layout>
-//       <section className={styles.container}>
-//         <div className={styles.cart_container}>
-//           <h2>Hello</h2>
-//           <h3>Your Shipping Basket</h3>
-//           <hr />
-//           {basket?.length == 0 ? (
-//             <p>No Items in your Cart</p>
-//           ) : (
-//             basket?.map((cartItem, i) => {
-//               return (
-//                 <section>
-//                   <div
-                  
-                  
-//                   className={styles.product__container}>
-//                     <ProductCard
-//                       product={cartItem.product}
-//                       key={i}
-//                       renderDesc={true  }
-//                       flex={true}
-//                       renderAdd={false}
-//                       enableHover={false}
-//                     />
-//                   </div>
-//                   <div className={styles.btn_container}>
-//                     <button
-//                       className={styles.btn}
-//                       onClick={() => increament(cartItem)}
-//                     >
-//                       <ArrowDropUpIcon size={10} />
-//                     </button>
-//                     <span>{cartItem.amount}</span>
-//                     <button
-//                       className={styles.btn}
-//                       onClick={() => decreament(cartItem)}
-//                     >
-//                       <ArrowDropDownIcon size={10} />
-//                     </button>
-//                   </div>
-//                 </section>
-//               );
-//             })
-//           )}
-//         </div>
-//         {basket?.length !== 0 && (
-
-//           <div className={styles.subtotal}>
-//             <div>
-//               <p>Subtotal({basket?.length} items)</p>
-//               {formatMoney(total)}
-//             </div>
-//             <span>
-//               <input type="checkbox" />
-//               <small>This Order Contains a gift</small>
-//             </span>
-//             <Link to="/payment"> Continue to Checkout</Link>
-//           </div>
-//         )}
-//       </section>
-//     </Layout>
-//   );
-// }
-
-
 export default function Cart() {
   const [{ basket }, dispatch] = useContext(DataContext);
   console.log(basket);
-  // ✅ SAFE total calculation
   const total = basket.reduce((amount, cartItem) => {
-    return amount + (cartItem?.product?.price || 0) * cartItem.amount;
+    return amount + cartItem.product.price * cartItem.amount;
   }, 0);
 
-  // ✅ INCREASE quantity
-  const increament = (cartItem) => {
+  const increament = (item) => {
     dispatch({
       type: Type.ADD_TO_BASKET,
-      item: cartItem.product,
+      item,
     });
   };
 
-  // ✅ DECREASE quantity
-  const decreament = (cartItem) => {
+  const decreament = (item) => {
     dispatch({
       type: Type.REMOVE_FROM_BASKET,
-      id: cartItem.product.id,
+      product: item.product,
     });
   };
-
   return (
     <Layout>
       <section className={styles.container}>
         <div className={styles.cart_container}>
           <h2>Hello</h2>
-          <h3>Your Shopping Basket</h3>
+          <h3>Your Shipping Basket</h3>
           <hr />
-          {console.log(basket.length)}
-
-          {basket.length === 0 ? (
-            <p>No items in your cart</p>
+          {basket?.length == 0 ? (
+            <p>No Items in your Cart</p>
           ) : (
-            basket.map((cartItem, i) => (
-              <section key={i} className={styles.cart_item}>
-                <div className={styles.product__container}>
-                  <ProductCard
-                    product={cartItem.product}
-                    renderDesc={true}
-                    flex={true}
-                    renderAdd={false}
-                    enableHover={false}
-                  />
-                </div>
-
-                <div className={styles.btn_container}>
-                  <button
-                    className={styles.btn}
-                    onClick={() => increament(cartItem)}
-                  >
-                    +
-                  </button>
-
-                  <span>{cartItem.amount}</span>
-
-                  <button
-                    className={styles.btn}
-                    onClick={() => decreament(cartItem)}
-                  >
-                    -
-                  </button>
-                </div>
-              </section>
-            ))
+            basket?.map((cartItem, i) => {
+              return (
+                <section>
+                  <div
+                  className={styles.product__container}>
+                    <ProductCard
+                      product={cartItem.product}
+                      key={i}
+                      renderDesc={true  }
+                      flex={true}
+                      renderAdd={false}
+                      enableHover={false}
+                    />
+                  </div>
+                  <div className={styles.btn_container}>
+                    <button
+                      className={styles.btn}
+                      onClick={() => increament(cartItem)}
+                    >
+                      <ArrowDropUpIcon size={10} />
+                    </button>
+                    <span>{cartItem.amount}</span>
+                    <button
+                      className={styles.btn}
+                      onClick={() => decreament(cartItem)}
+                    >
+                      <ArrowDropDownIcon size={10} />
+                    </button>
+                  </div>
+                </section>
+              );
+            })
           )}
         </div>
+        {basket?.length !== 0 && (
 
-        {basket.length !== 0 && (
           <div className={styles.subtotal}>
             <div>
-              <p>Subtotal ({basket.length} items)</p>
-              <strong>{formatMoney(total)}</strong>
+              <p>Subtotal({basket?.length} items)</p>
+              {formatMoney(total)}
             </div>
-
             <span>
               <input type="checkbox" />
-              <small>This order contains a gift</small>
+              <small>This Order Contains a gift</small>
             </span>
-
-            <Link to="/payment">Continue to Checkout</Link>
+            <Link to="/payment"> Continue to Checkout</Link>
           </div>
         )}
       </section>
     </Layout>
   );
 }
+
