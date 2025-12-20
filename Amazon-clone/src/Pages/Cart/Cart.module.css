@@ -23,9 +23,9 @@
 .cart_container h3 {
   padding: 10px;
 }
-/* .cart_container hr {
+.cart_container hr {
   margin: 5px;
-} */
+}
 /* CART ITEM SECTION */
 .cart_container section {
   display: flex;
@@ -48,12 +48,12 @@
   font-size: 16px;
   font-weight: 600;
 }
-.btn{
+.btn {
   background-color: var(--primary-color);
   border: 0.3px solid grey;
   font-weight: 400;
 }
-.btn:hover{
+.btn:hover {
   background-color: var(--primary-shade);
 }
 /* ===== SUBTOTAL BOX ===== */
