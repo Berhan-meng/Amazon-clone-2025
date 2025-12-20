@@ -11,7 +11,7 @@ import {
 import { useContext, useEffect } from "react";
 import { Type } from "./Utility/action.type";
 import { auth } from "./Utility/firebase";
-import  "./App.module.css";
+import  "./App.css";
 
 function App() {
   const [{ user }, dispatch] = useContext(DataContext);
