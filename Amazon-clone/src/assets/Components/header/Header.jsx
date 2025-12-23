@@ -7,6 +7,7 @@ import styles from "./header.module.css";
 import { auth } from "../../../Utility/firebase.js";
 import { GoSearch } from "react-icons/go";
 import { CiLocationOn } from "react-icons/ci";
+
 export default function Header() {
   const [{ user, basket }, dispatch] = useContext(DataContext);
   console.log(basket);
@@ -14,7 +15,6 @@ export default function Header() {
     return item.amount + amount;
   }, 0);
 
-  
   return (
     <>
       <header className={styles.header}>
@@ -77,8 +77,15 @@ export default function Header() {
             <div>
               {user ? (
                 <>
+                  {/* <p className={styles.header__smallText}>
+                    Hello,{" "}
+                    {user?.displayName || user?.email?.split("@")[0] || "User"}
+                  </p> */}
                   <p className={styles.header__smallText}>
-                    Hello, {user?.email.split("m")[0]}
+                    Hello,{" "}
+                    {typeof user?.email === "string"
+                      ? user.email.split("@")[0]
+                      : "User"}
                   </p>
                   <span
                     className={styles.header__boldText}

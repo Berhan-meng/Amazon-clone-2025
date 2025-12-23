@@ -6,8 +6,9 @@
   gap: 10px;
 }
 .container img {
-  width: 100px !important;
-  margin-top: 80px !important;
+  width: 150px !important;
+  /* margin-top: 0 !important; */
+
 }
 .container div:not(.subtotal) {
   height: auto !important;

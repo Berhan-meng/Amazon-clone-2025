@@ -42,15 +42,15 @@ export default function Cart() {
             basket?.map((cartItem, i) => {
               return (
                 <section>
-                  <div
-                  className={styles.product__container}>
+                  <div className={styles.product__container}>
                     <ProductCard
                       product={cartItem.product}
                       key={i}
-                      renderDesc={true  }
+                      renderDesc={false}
                       flex={true}
                       renderAdd={false}
                       enableHover={false}
+                      tracking={false}
                     />
                   </div>
                   <div className={styles.btn_container}>
@@ -74,7 +74,6 @@ export default function Cart() {
           )}
         </div>
         {basket?.length !== 0 && (
-
           <div className={styles.subtotal}>
             <div>
               <p>Subtotal({basket?.length} items)</p>
@@ -91,4 +90,3 @@ export default function Cart() {
     </Layout>
   );
 }
-

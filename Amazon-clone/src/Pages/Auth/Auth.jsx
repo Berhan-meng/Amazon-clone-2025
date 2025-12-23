@@ -23,7 +23,7 @@ export default function Auth() {
   const [{ user }, dispatch] = useContext(DataContext);
 
   const navStateData = useLocation();
-  // console.log(navStateData)
+  console.log(navStateData)
 
   // console.log(email);
   // console.log(password);

@@ -72,9 +72,42 @@ export default function Payment() {
         .collection("orders")
         .doc(paymentIntent.id)
         .set({
-          basket: basket,
+          basket,
           amount: paymentIntent.amount,
           created: paymentIntent.created,
+
+          status: "preparing", // preparing | shipped | delivered
+          estimatedDelivery: paymentIntent.created + 5 * 24 * 60 * 60, // +5 days (seconds)
+        });
+
+      // 3. Save order to Firestore
+      const orderData = {
+        userId: user.uid,
+        basket,
+        amount: paymentIntent.amount,
+        created: paymentIntent.created * 1000, // ms
+        status: "preparing",
+        estimatedDelivery:
+          paymentIntent.created * 1000 + 5 * 24 * 60 * 60 * 1000, // +5 days
+        timeline: {
+          preparing: Date.now(),
+          shipped: null,
+          delivered: null,
+        },
+      };
+
+      // Save globally
+      await db.collection("orders").doc(paymentIntent.id).set(orderData);
+
+      // Save reference for user
+      await db
+        .collection("users")
+        .doc(user.uid)
+        .collection("orders")
+        .doc(paymentIntent.id)
+        .set({
+          orderId: paymentIntent.id,
+          created: orderData.created,
         });
 
       // 4. Empty basket
@@ -119,6 +152,7 @@ export default function Payment() {
                 renderDesc={false}
                 flex={true}
                 renderAdd={false}
+                tracking={true}
               />
             ))}
           </div>

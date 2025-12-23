@@ -4,6 +4,7 @@ import ProductCard from "./ProductCard";
 import { FadeLoader } from "react-spinners";
 import styles from "./Product.module.css";
 import { producturl } from "../../../Api/endPoint";
+import Spinnner from "../../../Pages/Spinner";
 
 export default function Product() {
   const [product, setProduct] = useState([]);
@@ -15,7 +16,7 @@ export default function Product() {
       .catch((err) => console.log(err));
   }, []);
   if (!product) {
-    return <FadeLoader />;
+    return <Spinnner />;
   }
 
   return (
@@ -27,6 +28,7 @@ export default function Product() {
           renderDesc={false}
           renderAdd={true}
           enableHover={true}
+          select={true}
         />
       ))}
     </section>

@@ -11,7 +11,12 @@ import {
 import { useContext, useEffect } from "react";
 import { Type } from "./Utility/action.type";
 import { auth } from "./Utility/firebase";
-import  "./App.css";
+import "./App.css";
+
+window.onerror = function (message, source, lineno, colno, error) {
+  console.error("GLOBAL ERROR:", message);
+  console.error(error?.stack);
+};
 
 function App() {
   const [{ user }, dispatch] = useContext(DataContext);

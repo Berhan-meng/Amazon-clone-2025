@@ -7,14 +7,23 @@ import { FadeLoader } from "react-spinners";
 import { formatMoney } from "../../../Utility/Money";
 import { AddToCart } from "../../../Utility/addToCart";
 import styles from "./ProductCard.module.css";
+import Spinnner from "../../../Pages/Spinner";
 
-export default function ProductCard({ product, renderDesc, renderAdd, flex, enableHover}) {
+export default function ProductCard({
+  product,
+  renderDesc,
+  renderAdd,
+  flex,
+  enableHover,
+  showTracking,
+  orderId,
+}) {
   const { image, title, id, rating, price, category, description } = product;
   const [state, dispatch] = useContext(DataContext);
   const { addCartItem } = AddToCart();
   console.log(state);
   if (!product) {
-    return <FadeLoader />;
+    return <Spinnner />;
   }
   return (
     <div
@@ -34,10 +43,8 @@ export default function ProductCard({ product, renderDesc, renderAdd, flex, enab
             ({rating.count})
           </span>
         </div>
-
         <p className={styles.productCard__price}> {formatMoney(price)}</p>
         {renderDesc && <p style={{ textAlign: "justify" }}>{description}</p>}
-
         <p className={styles.productCard__category}>{category}</p>
         {renderAdd && (
           <button
@@ -48,6 +55,15 @@ export default function ProductCard({ product, renderDesc, renderAdd, flex, enab
           </button>
         )}
       </div>
+      {showTracking && orderId && (
+        <div className={styles.productActions}>
+          <Link to={`/tracking/${orderId}`}>
+            <button className={styles.track_package_button}>
+              Track package
+            </button>
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

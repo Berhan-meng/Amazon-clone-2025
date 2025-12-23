@@ -4,17 +4,37 @@ import { db } from "../../Utility/firebase";
 import { DataContext } from "../../assets/Components/DataProvider/DataProvider";
 import ProductCard from "../../assets/Components/Product/ProductCard";
 import styles from "./orders.module.css";
+// import { Link } from "react-router-dom";
 export default function Orders() {
   const [{ user }, dispatch] = useContext(DataContext);
   const [orders, setOrders] = useState([]);
+  // useEffect(() => {
+  //   if (user) {
+  //     db.collection("users")
+  //       .doc(user.uid)
+  //       .collection("orders")
+  //       .orderBy("created", "desc")
+  //       .onSnapshot((snapshot) => {
+  //         console.log(snapshot);
+  //         setOrders(
+  //           snapshot.docs.map((doc) => ({
+  //             id: doc.id,
+  //             data: doc.data(),
+  //           }))
+  //         );
+  //       });
+  //   } else {
+  //     setOrders([]);
+  //   }
+  // }, []);
   useEffect(() => {
     if (user) {
-      db.collection("users")
+      return db
+        .collection("users")
         .doc(user.uid)
         .collection("orders")
         .orderBy("created", "desc")
         .onSnapshot((snapshot) => {
-          console.log(snapshot);
           setOrders(
             snapshot.docs.map((doc) => ({
               id: doc.id,
@@ -25,7 +45,8 @@ export default function Orders() {
     } else {
       setOrders([]);
     }
-  }, []);
+  }, [user]);
+
   return (
     <Layout>
       <section className={styles.container}>
@@ -44,10 +65,12 @@ export default function Orders() {
                 {eachOrder?.data?.basket?.map((order) => (
                   <ProductCard
                     key={order.id}
+                    orderId={eachOrder.id}
                     product={order.product}
                     flex={true}
                     renderAdd={false}
-                    renderDesc={false}
+                    renderDesc={true}
+                    showTracking
                   />
                 ))}
               </div>
