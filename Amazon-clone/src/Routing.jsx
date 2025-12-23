@@ -6,7 +6,7 @@ import ProductDetail from "./Pages/ProductDetail/ProductDetail";
 import Results from "./Pages/Results/Results";
 import Orders from "./Pages/Orders/Orders";
 import Auth from "./Pages/Auth/Auth";
-import ProtectedRoute from "./assets/Components/protectedRoute/protectedRoute";
+import ProtectedRoute from "./assets/Components/protectedRoute/ProtectedRoute";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import Tracking from "./Pages/Tracking/Tracking.jsx";
