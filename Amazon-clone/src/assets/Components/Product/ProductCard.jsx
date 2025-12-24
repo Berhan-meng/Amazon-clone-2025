@@ -15,8 +15,8 @@ export default function ProductCard({
   renderAdd,
   flex,
   enableHover,
-  showTracking,
-  orderId,
+  // showTracking,
+  // orderId,
 }) {
   const { image, title, id, rating, price, category, description } = product;
   const [state, dispatch] = useContext(DataContext);
@@ -55,7 +55,7 @@ export default function ProductCard({
           </button>
         )}
       </div>
-      {showTracking && orderId && (
+      {/* {showTracking && orderId && (
         <div className={styles.productActions}>
           <Link to={`/tracking/${orderId}`}>
             <button className={styles.track_package_button}>
@@ -63,7 +63,7 @@ export default function ProductCard({
             </button>
           </Link>
         </div>
-      )}
+      )} */}
     </div>
   );
 }

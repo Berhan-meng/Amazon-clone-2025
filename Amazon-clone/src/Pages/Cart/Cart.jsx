@@ -110,33 +110,34 @@ export default function Cart() {
                   <div className={styles.quantity_controls}>
                     <button
                       className={styles.quantity_btn}
-                      onClick={() => decrement(cartItem)}
-                      aria-label="Decrease quantity"
-                    >
-                      <ArrowDropDownIcon />
-                    </button>
-                    <span className={styles.quantity}>{cartItem.amount}</span>
-                    <button
-                      className={styles.quantity_btn}
                       onClick={() => increment(cartItem)}
                       aria-label="Increase quantity"
                     >
                       <ArrowDropUpIcon />
                     </button>
+                    <span className={styles.quantity}>{cartItem.amount}</span>
+                    <button
+                      className={styles.quantity_btn}
+                      onClick={() => decrement(cartItem)}
+                      aria-label="Decrease quantity"
+                    >
+                      <ArrowDropDownIcon />
+                    </button>
                   </div>
 
-                  <div className={styles.item_total}>
+                  {/* <div className={styles.item_total}>
                     <span>
                       {formatMoney(cartItem.product.price * cartItem.amount)}
                     </span>
-                  </div>
+                  </div> */}
 
                   <button
                     className={styles.remove_btn}
                     onClick={() => removeItem(cartItem.product)}
                     aria-label="Remove item"
                   >
-                    <DeleteIcon />
+                    <small>Delete</small>
+                    <DeleteIcon>Delete</DeleteIcon>
                   </button>
                 </div>
               </div>
