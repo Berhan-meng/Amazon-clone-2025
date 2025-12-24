@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import ProductCard from "./ProductCard";
-import { FadeLoader } from "react-spinners";
 import styles from "./Product.module.css";
 import { producturl } from "../../../Api/endPoint";
 import Spinnner from "../../../Pages/Spinner";

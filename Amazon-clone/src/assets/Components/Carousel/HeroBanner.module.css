@@ -1,12 +1,7 @@
 .heroBanner {
-  /* width: 100%;
-  height: fit-content;
-  position: relative;
-  overflow-x: hidden;
-  overflow-y: visible; */
     width: 100%;
   position: relative;
-  overflow: hidden; /* important */
+  overflow: hidden; 
 }
 .heroBanner img {
   width: 100%;
