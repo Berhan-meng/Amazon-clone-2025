@@ -84,7 +84,7 @@ export default function Header() {
                   <p className={styles.header__smallText}>
                     Hello,{" "}
                     {typeof user?.email === "string"
-                      ? user.email.split("@")[0]
+                      ? user.email.split("m")[0]
                       : "User"}
                   </p>
                   <span
