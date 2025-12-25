@@ -7,10 +7,11 @@ import {
   DataContext,
   // DataProvider,
 } from "./assets/Components/DataProvider/DataProvider";
-// import { reducer, initialState } from "./Utility/reducer";
 import { useContext, useEffect } from "react";
 import { Type } from "./Utility/action.type";
 import { auth } from "./Utility/firebase";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 function App() {
@@ -27,7 +28,13 @@ function App() {
     return unsubscribe;
   }, []);
 
-  return <Routing />;
+  return (
+    <>
+      <Routing />;
+      <ToastContainer position="top-center" autoClose={3000} />
+    </>
+  );
+    
   // <ThemeProvider>
   //   <ComponentA />
   //   <ComponentB />

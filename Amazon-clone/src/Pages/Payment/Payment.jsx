@@ -9,6 +9,7 @@ import { ClipLoader } from "react-spinners";
 import { db } from "../../Utility/firebase.js";
 import { useNavigate } from "react-router-dom";
 import Layout from "../../assets/Components/Layout/Layout.jsx";
+import { toast } from "react-toastify";
 import styles from "./payment.module.css";
 
 export default function Payment() {
@@ -73,7 +74,7 @@ export default function Payment() {
       // 1. Get clientSecret from backend
       const response = await instance({
         method: "POST",
-        url: `/payment/create?total=${Math.round(total * 100)}`, // Ensure integer cents
+        url: `/payment/create?total=${Math.round(total * 100)}`,
       });
 
       const clientSecret = response.data?.clientSecret;
@@ -144,13 +145,12 @@ export default function Payment() {
         amount: orderData.amount,
         amountFormatted: orderData.amountFormatted,
         status: orderData.status,
-        basket: basket, // ← THIS IS THE KEY FIX! Add the basket
-        address: orderData.address, // Optional but good to have
+        basket: basket,
+        address: orderData.address,
       });
 
       await batch.commit();
-
-      console.log("Order saved successfully");
+      toast.success("Payment successful! Your order has been placed.");
 
       // 5. Empty basket
       dispatch({ type: Type.EMPTY_BASKET });
@@ -259,10 +259,7 @@ export default function Payment() {
                 </div>
 
                 <div className={styles.disclaimer}>
-                  <small>
-                    Your payment is secured with Stripe. No card details are
-                    stored on our servers.
-                  </small>
+                  <small>Your payment is secured with Stripe.</small>
                 </div>
               </form>
             </div>
